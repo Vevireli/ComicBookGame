@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Зомби: Комикс-игра</title>
+    <style>
+        :root {
+            --bg: #121212;
+            --surface: #1e1e1e;
+            --accent: #8b0000;
+            --accent-light: #ff4444;
+            --text: #e0e0e0;
+            --muted: #888;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            padding: 30px 0;
+            border-bottom: 3px solid var(--accent);
+            margin-bottom: 30px;
+        }
+        header h1 {
+            color: var(--accent-light);
+            font-size: 2.2rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            text-shadow: 2px 2px 0 #000;
+        }
+        .panel-image-wrap {
+            background: #000;
+            border: 2px solid #333;
+            border-radius: 8px;
+            padding: 8px;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+        .panel-image-wrap img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+            display: block;
+            margin: 0 auto;
+        }
+        .no-image {
+            padding: 80px;
+            color: var(--muted);
+            font-style: italic;
+        }
+        .panel-meta {
+            background: var(--surface);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 24px;
+            border-left: 5px solid var(--accent);
+        }
+        .panel-meta h2 { color: var(--accent-light); margin-bottom: 8px; }
+        .panel-meta h3 { color: #ffaaaa; margin-bottom: 12px; font-weight: 500; }
+        .choices h3 {
+            color: var(--accent-light);
+            margin-bottom: 16px;
+            font-size: 1.2rem;
+        }
+        .choice-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .choice-btn {
+            display: block;
+            background: var(--accent);
+            color: #fff;
+            text-decoration: none;
+            padding: 16px 20px;
+            border-radius: 6px;
+            font-size: 1.05rem;
+            transition: .2s;
+            border: 1px solid #a00000;
+        }
+        .choice-btn:hover {
+            background: #a00000;
+            transform: translateX(6px);
+            box-shadow: 0 0 12px rgba(255,0,0,.25);
+        }
+        .choice-btn small {
+            display: block;
+            margin-top: 6px;
+            color: #ffaaaa;
+            font-size: .85rem;
+        }
+        .end-box {
+            text-align: center;
+            padding: 40px;
+            background: var(--surface);
+            border-radius: 8px;
+        }
+        .btn-restart {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 28px;
+            background: #333;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+            border: 1px solid #555;
+        }
+        .btn-restart:hover { background: #444; }
+        .stats-bar {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: .95rem;
+            color: var(--muted);
+        }
+        .stats-bar span { color: var(--accent-light); font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>☣ Зомби: Комикс-игра ☣</h1>
+        </header>
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

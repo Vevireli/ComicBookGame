@@ -1,0 +1,16 @@
+{% extends "game/base.html" %}
+{% block content %}
+<div class="panel-meta">
+    <h2>Начало приключения</h2>
+    <p>Выберите панель для старта или задайте начальную панель в админке (галочка «Начальная панель»).</p>
+</div>
+<div class="choice-list">
+    {% for p in panels %}
+        <a href="{% url 'game:panel_detail' p.number %}" class="choice-btn">
+            Панель {{ p.number }}{% if p.title %} — {{ p.title }}{% endif %}
+        </a>
+    {% empty %}
+        <p>Панелей пока нет. Добавьте их через <a href="/admin/">админ-панель</a>.</p>
+    {% endfor %}
+</div>
+{% endblock %}

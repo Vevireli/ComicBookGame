@@ -1,0 +1,47 @@
+{% extends "game/base.html" %}
+
+{% block content %}
+<div class="stats-bar">
+    <div>ОЗ: <span>{{ hp }}</span></div>
+    <div>Инвентарь: <span>{{ inventory|join:", "|default:"пусто" }}</span></div>
+</div>
+
+<div class="panel-image-wrap">
+    {% if panel.image %}
+        <img src="{{ panel.image.url }}" alt="Панель {{ panel.number }}" loading="lazy">
+    {% else %}
+        <div class="no-image">Изображение не загружено — загрузите его через админку</div>
+    {% endif %}
+</div>
+
+<div class="panel-meta">
+    <h2>Панель {{ panel.number }}</h2>
+    {% if panel.title %}<h3>{{ panel.title }}</h3>{% endif %}
+    <p>{{ panel.description|linebreaksbr }}</p>
+</div>
+
+<div class="choices">
+    {% if panel.is_end %}
+        <div class="end-box">
+            {% if "побед" in panel.description|lower or "выжил" in panel.description|lower or "спас" in panel.description|lower %}
+                <h2>🎉 Вы выжили!</h2>
+            {% else %}
+                <h2>💀 Вы погибли...</h2>
+            {% endif %}
+            <a href="{% url 'game:start' %}" class="btn-restart">↻ Начать заново</a>
+        </div>
+    {% elif choices %}
+        <h3>Выберите действие:</h3>
+        <div class="choice-list">
+            {% for c in choices %}
+                <a href="{% if c.to_panel %}{% url 'game:panel_detail' c.to_panel.number %}{% else %}#{% endif %}" class="choice-btn">
+                    {{ c.text }}
+                    {% if c.condition %}<small>Условие: {{ c.condition }}</small>{% endif %}
+                </a>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>Нет доступных действий. <a href="{% url 'game:start' %}">Вернуться к началу</a></p>
+    {% endif %}
+</div>
+{% endblock %}
